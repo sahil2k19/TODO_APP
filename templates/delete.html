@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <p>Are you sure wanna delete '<b>{{task}}</b>' </p>
+  <a href="{% url "home" %}">cancel</a>
+  <form method="POST" action="">
+      {% csrf_token %}
+      <input type="submit" name="confirm">
+  </form>
+  
+{% endblock content %}

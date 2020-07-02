@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block style %}
+
+ol.breadcrumb {
+width: 904px;
+}
+
+button.btn.btn-success {
+float: right;
+margin-right: 10px;
+}
+button.btn.btn-danger {
+float: right;
+margin-right: 10px;
+}
+
+ol.breadcrumb {
+width: 700px;
+}
+
+.container {
+width: fit-content;
+}
+
+input#id_title {
+width: 600px;
+height: 50px;
+}
+.add{
+margin-left:10px;
+height: 50px;
+}
+
+{% endblock style %}
+{% block content %}
+
+<form method="POST" action="">
+  {% csrf_token %}
+  {{form}}
+  <button type="submit" class=" add btn btn-success">ADD</button>
+</form>
+
+{% for task in tasks  %}
+
+<div class="row">
+
+  <ol class="breadcrumb">
+    <div class=col>
+      {% if task.complete == True %}
+      <strike>{{task}}</strike>
+      {% else %}
+        <p>{{task}}</p>
+      {% endif %}
+      <!-- <li class="breadcrumb-item active" aria-current="page">{{task.title}}</li> -->
+    </div>
+    <div class="col">
+      <a href="{% url 'update' task.id %}">
+        <button type="submit" class="btn btn-success">Update</button>
+      </a>
+      <a href = '{% url 'delete' task.id %}' >
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </a>
+    </div>
+
+  </ol>
+</div>
+
+
+
+{% endfor %}
+
+
+
+{% endblock content %}
